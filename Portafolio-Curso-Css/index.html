@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Henry Leonardo Parra Velandia - Portfolio Personal</title>
+  <meta name="description"
+    content="Portfolio personal de Leonardo Parra. Desarrollador Web.">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Henry Leonardo Parra Velandia - Portfolio">
+  <meta property="og:description" content="Desarrollador Web. Transformando ideas en experiencias digitales.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Henry Leonardo Parra Velandia - Portfolio">
+  <meta name="twitter:description" content="Desarrollador Web. Transformando ideas en experiencias digitales.">
+  <meta name="twitter:image" content="">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+
+<body>
+  <!-- Cursor personalizado -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+  
+  <!-- Partículas de fondo -->
+  <canvas id="particles-canvas"></canvas>
+  
+  <!-- Indicador de progreso de scroll -->
+  <div class="scroll-progress"></div>
+  
+  <!-- Toggle modo oscuro -->
+  <button class="theme-toggle" aria-label="Cambiar tema">
+    <span class="theme-toggle__icon">🌙</span>
+  </button>
+
+  <!-- Header con navegación -->
+  <header class="header">
+    <div class="header__container">
+      <div class="header__brand">
+        <h1 class="header__name">Leonardo Parra</h1>
+        <p class="header__tagline">Desarrollador Web</p>
+      </div>
+
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a href="#inicio" class="nav__link nav__link--active">Inicio</a>
+          </li>
+          <li class="nav__item">
+            <a href="#sobre-mi" class="nav__link">Sobre mí</a>
+          </li>
+          <li class="nav__item">
+            <a href="#proyectos" class="nav__link">Proyectos</a>
+          </li>
+          <li class="nav__item">
+            <a href="#habilidades" class="nav__link">Habilidades</a>
+          </li>
+          <li class="nav__item">
+            <a href="#contacto" class="nav__link">Contacto</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="main">
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+      <div class="hero__container">
+        <h2 class="hero__title">
+          <span class="typewriter" data-text="¡Hola! Soy Leonardo Parra"></span>
+        </h2>
+        <p class="hero__subtitle">
+          <span class="typewriter" data-text="Desarrollador Web en constante crecimiento" data-delay="2000"></span>
+        </p>
+        <p class="hero__description">
+          <span class="typewriter" data-text="Transformando ideas en experiencias digitales adaptadas a las necesidades de cada usuario" data-delay="4000"></span>
+        </p>
+
+        <div class="hero__actions">
+          <a href="#proyectos" class="button button--primary">Ver Mis Proyectos</a>
+          <a href="#contacto" class="button button--secondary">Contáctame</a>
+        </div>
+
+        <div class="hero__stats">
+          <div class="stat">
+            <span class="stat__number">36+</span>
+            <span class="stat__label">Meses aprendiendo</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number">12+</span>
+            <span class="stat__label">Proyectos completados</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number">6+</span>
+            <span class="stat__label">Tecnologías</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre Mí -->
+    <section class="about" id="sobre-mi">
+      <div class="about__container">
+        <h2 class="about__title">Mi Viaje en el Desarrollo Web</h2>
+
+        <p class="about__intro">
+          Soy <strong>desarrollador web en crecimiento</strong>,
+          Con conocimientos en .Net, C#, JavaScript, HTML, CSS, SQL Server, Javascript, Appscript y PowerBI para crear soluciones web escalables.
+        </p>
+
+        <p class="about__text">
+          Me apasiona la tecnología y la innovación. Cada día busco ampliar mis conocimientos y 
+          nuevas formas de mejorar mis habilidades alineandome siempre
+          con los marcos de la inteligencia artificial, buenas prácticas, metodologias agiles, principios SOLID y nuevas tecnologias.
+        </p>
+
+        <blockquote class="quote">
+          <p class="quote__text">
+            "En la era de la innovación, reinventarse no es una opción, es una obligación"
+          </p>
+          <cite class="quote__author">— Crear o morir, Andrés Oppenheimer</cite>
+        </blockquote>
+
+        <div class="values">
+          <h3 class="values__title">Mis Valores</h3>
+          <ul class="values__list">
+            <li class="values__item">
+              <span class="values__icon">🎯</span>
+              <div>
+                <strong>Liderazgo</strong>
+                <span>Comprometido con mi equipo, no con mi grupo.</span>
+              </div>
+            </li>
+            <li class="values__item">
+              <span class="values__icon">📚</span>
+              <div>
+                <strong>Íntegro y honesto</strong>
+                <span>El componente ético en mi vida es imprescindible.</span>
+              </div>
+            </li>
+            <li class="values__item">
+              <span class="values__icon">🤝</span>
+              <div>
+                <strong>Objetivo</strong>
+                <span>Soy imparcial al evaluar el trabajo de otros así como valorar nuevas tecnologías y soluciones.</span>
+              </div>
+            </li>
+            <li class="values__item">
+              <span class="values__icon">💡</span>
+              <div>
+                <strong>Aprendizaje Continuo</strong>
+                <span>Reconozco que la tecnología evoluciona rápidamente y mantengo la mentalidad de crecer diariamente.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section class="projects" id="proyectos">
+      <div class="projects__container">
+        <h2 class="projects__title">Mis Proyectos como Freelancer</h2>
+        <p class="projects__description">
+          Suelo crear soluciones web para pequeñas y medianas empresas, creando sitios web, aplicaciones web, reportes y dashboards para mejorar la eficiencia y la toma de decisiones.
+        </p>
+
+        <div class="projects__grid">
+          <article class="project">
+            <h3 class="project__title">ECOSYSVAL</h3>
+            <p class="project__description">
+              El Observatorio Mexicano de la Crisis (OMEC), surge cuando los constantes desequilibrios económicos,
+               políticos, sociales y ambientales se hacen presentes en los ámbitos nacional e internacional; así, generando la necesidad de contar con información veraz, útil y oportuna.
+               En mis prácticas profesionales, adopté el rol de Scrum Master y desarrollador web en el proyecto.
+            </p>
+
+            <h4 class="project__subtitle">Lo que aprendí:</h4>
+            <ul class="project__learnings">
+              <li>Scrum Leadership</li>
+              <li>HTML5</li>
+              <li>CSS Tailwind</li>
+              <li>JavaScript</li>
+              <li>SQL Server</li>
+              <li>React</li>
+            </ul>
+
+            <div class="project__technologies">
+              <span class="tag">JavaScript</span>
+              <span class="tag">CSS Tailwind</span>
+              <span class="tag">HTML5</span>
+              <span class="tag">SQL Server</span>
+              <span class="tag">React</span>
+            </div>
+
+            <div class="project__links">
+              <a href="https://ecosistemaencadena.com/" class="project__link" target="_blank" rel="noopener noreferrer">Ver proyecto</a>
+            </div>
+          </article>
+          <article class="project">
+            <h3 class="project__title">ACESHOPCOL</h3>
+            <p class="project__description">
+              Es una plataforma de e-commerce para la venta de productos y servicios de una empresa de ropa, 
+              se apoyó el emprendimiento de una empresa colombiana para mejorar su presencia en línea y aumentar sus ventas.
+              Actué como desarrollador web Full Stack para crear la plataforma de e-commerce y el sitio web de la empresa Aceshop Colombia.
+            </p>
+
+            <h4 class="project__subtitle">Lo que aprendí:</h4>
+            <ul class="project__learnings">
+              <li>Amazon Route 53</li>
+              <li>JavaScript</li>
+              <li>SQL Server</li>
+              <li>React</li>
+            </ul>
+
+            <div class="project__technologies">
+              <span class="tag">JavaScript</span>
+              <span class="tag">CSS Tailwind</span>
+              <span class="tag">HTML5</span>
+              <span class="tag">Amazon Route 53</span>
+            </div>
+
+            <div class="project__links">
+              <a href="https://www.aceshopcol.com/" class="project__link" target="_blank" rel="noopener noreferrer">Ver proyecto</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="projects" id="proyectos-empresa">
+      <div class="projects__container">
+        <h2 class="projects__title">Mis Proyectos como Empleado y Desarrollador Web</h2>
+        <p class="projects__description">
+          Desarrollos adaptados a las necesidades de cada empresa, creando sitios web, aplicaciones web, reportes y dashboards para mejorar la eficiencia y la toma de decisiones de cada empresa.
+        </p>
+      
+        <div class="projects__grid">
+          <article class="project">
+            <h3 class="project__title">Club Usados De Banco</h3>
+            <p class="project__description">
+              Plataforma para el registro de usuarios en una feria inmobiliaria de compra y venta de propiedades. 
+              Realizada a la medida de la empresa para mejorar la experiencia de los usuarios y la eficiencia de la feria.
+            </p>
+      
+            <h4 class="project__subtitle">Lo que aprendí:</h4>
+            <ul class="project__learnings">
+              <li>HTML5</li>
+              <li>CSS Tailwind</li>
+              <li>JavaScript</li>
+              <li>Web Estática</li>
+            </ul>
+            <p class="project__description"></p>
+            <div class="project__technologies">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS Tailwind</span>
+              <span class="tag">JavaScript</span>
+
+              <span class="tag">Web Estática</span>
+            </div>
+      
+            <div class="project__links">
+              <a href="https://club.usadosdebanco.com/" class="project__link" target="_blank" rel="noopener noreferrer">Ver proyecto</a>
+            </div>
+          </article>
+          <article class="project">
+            <h3 class="project__title">Landing Pages para Administración de Activos (Empresa)</h3>
+            <p class="project__description">
+              Empresa con diferentes vertientes y proyectos para las cuales se crearon landing pages para mejorar la presencia en línea y la eficiencia de la gestión de activos.
+            </p>
+      
+            <h4 class="project__subtitle">Lo que aprendí:</h4>
+            <ul class="project__learnings">
+              <li>Wordpress</li>
+              <li>Gsap</li>
+              <li>Elementor</li>
+              <li>PHP</li>
+              <li>MySQL</li>
+              <li>Apache HTTP Server</li>
+              <li>HTML5</li>
+              <li>jQuery</li>
+              <li>Core-Js</li>
+            </ul>
+      
+            <div class="project__technologies">
+              <span class="tag">JavaScript</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">CSS</span>
+              <span class="tag">PHP</span>
+              <span class="tag">Apache HTTP Server</span>
+              <span class="tag">HTML5</span>
+              <span class="tag">jQuery</span>
+              <span class="tag">Core-Js</span>
+              <span class="tag">LightSail</span>
+            </div>
+      
+            <div class="project__links">
+              <a href="https://www.administraciondeactivos.net/" class="project__link" target="_blank" rel="noopener noreferrer">Ver proyecto 1</a>
+              <a href="https://alderecho.net/" class="project__link" target="_blank" rel="noopener noreferrer">Ver proyecto 2</a>
+              <a href="https://mikayros.com/" class="project__link" target="_blank" rel="noopener noreferrer">Ver proyecto 3</a>
+              <a href="https://www.gestuber.com/" class="project__link" target="_blank" rel="noopener noreferrer">Ver proyecto 4</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Habilidades -->
+    <section class="skills" id="habilidades">
+      <div class="skills__container">
+        <h2 class="skills__title">Mis Habilidades</h2>
+
+        <p class="skills__intro">
+          Soy Ingeniero de Sistemas con experiencia en automatización de procesos, desarrollo backend (C#, .NET, .NET Framework), análisis de datos y administración de infraestructuras en AWS. He optimizado recursos y costes, gestionado entornos Windows Server y Google Workspace, y creado soluciones escalables para empresas de diferentes sectores. Me destaco por impulsar la eficiencia operativa, la mejora continua y la comunicación clara con equipos técnicos.
+        </p>
+
+        <h3 class="skills__subtitle">Principales Tecnologías y Competencias</h3>
+
+        <div class="skills__list">
+          <div class="skill">
+            <h4 class="skill__name">
+              C# / .NET / ASP.NET
+              <span class="skill__indicator">(Desarrollo backend & automatización)</span>
+            </h4>
+            <div class="skill__bar">
+              <div class="skill__progress skill__progress--net" style="width:80%"></div>
+            </div>
+            <span class="skill__percentage">80%</span>
+          </div>
+
+          <div class="skill">
+            <h4 class="skill__name">
+              Google Apps Script (JavaScript)
+              <span class="skill__indicator">(Automatización y CRM sin servidor)</span>
+            </h4>
+            <div class="skill__bar">
+              <div class="skill__progress skill__progress--js" style="width:75%"></div>
+            </div>
+            <span class="skill__percentage">75%</span>
+          </div>
+
+          <div class="skill">
+            <h4 class="skill__name">
+              AWS (Lightsail, S3, CloudFront, Route 53)
+              <span class="skill__indicator">(Infraestructura y administración)</span>
+            </h4>
+            <div class="skill__bar">
+              <div class="skill__progress skill__progress--aws" style="width:70%"></div>
+            </div>
+            <span class="skill__percentage">70%</span>
+          </div>
+
+          <div class="skill">
+            <h4 class="skill__name">
+              SQL / MySQL / SQL Server
+              <span class="skill__indicator">(Gestión e integración de datos)</span>
+            </h4>
+            <div class="skill__bar">
+              <div class="skill__progress skill__progress--sql" style="width:70%"></div>
+            </div>
+            <span class="skill__percentage">70%</span>
+          </div>
+
+          <div class="skill">
+            <h4 class="skill__name">
+              WordPress & Web estática
+              <span class="skill__indicator">(Aprovisionamiento y hosting)</span>
+            </h4>
+            <div class="skill__bar">
+              <div class="skill__progress skill__progress--wp" style="width:65%"></div>
+            </div>
+            <span class="skill__percentage">65%</span>
+          </div>
+
+          <div class="skill">
+            <h4 class="skill__name">
+              Power BI / Looker Studio
+              <span class="skill__indicator">(Análisis y visualización de datos)</span>
+            </h4>
+            <div class="skill__bar">
+              <div class="skill__progress skill__progress--bi" style="width:60%"></div>
+            </div>
+            <span class="skill__percentage">60%</span>
+          </div>
+
+          <div class="skill">
+            <h4 class="skill__name">
+              Windows Server / Google Workspace
+              <span class="skill__indicator">(Administración y seguridad)</span>
+            </h4>
+            <div class="skill__bar">
+              <div class="skill__progress skill__progress--gsuite" style="width:60%"></div>
+            </div>
+            <span class="skill__percentage">60%</span>
+          </div>
+
+          <div class="skill">
+            <h4 class="skill__name">
+              DevOps & QA
+              <span class="skill__indicator">(Soporte, pruebas y metodologías)</span>
+            </h4>
+            <div class="skill__bar">
+              <div class="skill__progress skill__progress--devops" style="width:50%"></div>
+            </div>
+            <span class="skill__percentage">50%</span>
+          </div>
+        </div>
+
+        <div class="skill">
+          <h3 class="learning__title">Otras habilidades y conocimientos</h3>
+          <ul class="learning__list">
+            <li class="learning__item">Gobierno de automatización (RPA Governance) y mapeo de procesos</li>
+            <li class="learning__item">API RESTful, integración de servicios y patrones de diseño</li>
+            <li class="learning__item">Optimización de aplicaciones: mejora continua y reutilización de componentes transversales</li>
+            <li class="learning__item">Coordinación técnica, soporte QA y elaboración de dashboards operativos</li>
+            <li class="learning__item">Aplicación de políticas de seguridad, control antispam y migraciones en Google Workspace</li>
+            <li class="learning__item">Comunicación efectiva y pensamiento analítico</li>
+          </ul>
+        </div>
+
+        <div class="skill">
+          <h3 class="learning__title">Próximas tecnologías que planeo aprender</h3>
+          <ul class="learning__list">
+            <li class="learning__item">React.js (Nuevas Features) para interfaces web dinámicas</li>
+            <li class="learning__item">Node.js (Nuevas Features) para backend escalable</li>
+            <li class="learning__item">Azure para soluciones en la nube</li>
+            <li class="learning__item">Automatización avanzada (Nuevas Features) y Cloud DevOps</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="contact" id="contacto">
+      <div class="contact__container">
+        <h2 class="contact__title">¡Conectemos!</h2>
+        <p class="contact__description">
+          ¿Tienes un proyecto en mente? ¿Quieres colaborar?
+          Me encantaría conocer tus ideas y ver cómo puedo ayudarte.
+        </p>
+
+        <div class="contact__methods">
+          <div class="contact__method">
+            <h3 class="contact__method-title">📧 Email</h3>
+            <a href="mailto:leonardoparra_99@hotmail.com" class="contact__link">
+              leonardoparra_99@hotmail.com
+            </a>
+          </div>
+
+          <div class="contact__method">
+            <h3 class="contact__method-title">💼 LinkedIn</h3>
+            <a href="https://www.linkedin.com/in/hleonardopvelandia/" class="contact__link" target="_blank" rel="noopener noreferrer">
+              /in/hleonardopvelandia
+            </a>
+          </div>
+
+        </div>
+
+        <div class="hero__actions">
+          <a href="mailto:leonardoparra_99@hotmail.com" class="button button--primary button--large">
+            Enviar mensaje
+          </a>
+          <a href="#" class="button button--secondary button--large">
+            Descargar CV
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__container">
+      <nav class="footer__nav">
+        <a href="#inicio" class="footer__link">Inicio</a>
+        <a href="#sobre-mi" class="footer__link">Sobre mí</a>
+        <a href="#proyectos" class="footer__link">Proyectos</a>
+        <a href="#habilidades" class="footer__link">Habilidades</a>
+        <a href="#contacto" class="footer__link">Contacto</a>
+      </nav>
+
+      <p class="footer__copyright">
+        © 2025 Henry Leonardo Parra Velandia. Todos los derechos reservados.
+      </p>
+      <p class="footer__credits">
+        Hecho por Ingeniero de Sistemas Leonardo Parra Velandia
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Sistema de partículas
+    class ParticleSystem {
+      constructor() {
+        this.canvas = document.getElementById('particles-canvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.mouse = { x: 0, y: 0 };
+        this.init();
+      }
+
+      init() {
+        this.resize();
+        this.createParticles();
+        this.bindEvents();
+        this.animate();
+      }
+
+      resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+      }
+
+      createParticles() {
+        const particleCount = Math.floor((this.canvas.width * this.canvas.height) / 15000);
+        for (let i = 0; i < particleCount; i++) {
+          this.particles.push({
+            x: Math.random() * this.canvas.width,
+            y: Math.random() * this.canvas.height,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            size: Math.random() * 2 + 1
+          });
+        }
+      }
+
+      bindEvents() {
+        window.addEventListener('resize', () => this.resize());
+        window.addEventListener('mousemove', (e) => {
+          this.mouse.x = e.clientX;
+          this.mouse.y = e.clientY;
+        });
+      }
+
+      animate() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        this.particles.forEach(particle => {
+          // Movimiento
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+
+          // Rebote en bordes
+          if (particle.x < 0 || particle.x > this.canvas.width) particle.vx *= -1;
+          if (particle.y < 0 || particle.y > this.canvas.height) particle.vy *= -1;
+
+          // Interacción con mouse
+          const dx = this.mouse.x - particle.x;
+          const dy = this.mouse.y - particle.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            particle.x -= dx * 0.01;
+            particle.y -= dy * 0.01;
+          }
+
+          // Dibujar partícula
+          this.ctx.beginPath();
+          this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+          this.ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--particle-color') || '#2563eb';
+          this.ctx.fill();
+        });
+
+        requestAnimationFrame(() => this.animate());
+      }
+    }
+
+    // Efecto máquina de escribir
+    class Typewriter {
+      constructor(element, text, speed = 50, delay = 0) {
+        this.element = element;
+        this.text = text;
+        this.speed = speed;
+        this.delay = delay;
+        this.index = 0;
+      }
+
+      start() {
+        setTimeout(() => {
+          this.type();
+        }, this.delay);
+      }
+
+      type() {
+        if (this.index < this.text.length) {
+          this.element.textContent += this.text.charAt(this.index);
+          this.index++;
+          setTimeout(() => this.type(), this.speed);
+        }
+      }
+    }
+
+    // Cursor personalizado
+    class CustomCursor {
+      constructor() {
+        this.cursor = document.querySelector('.cursor');
+        this.follower = document.querySelector('.cursor-follower');
+        this.init();
+      }
+
+      init() {
+        document.addEventListener('mousemove', (e) => {
+          this.cursor.style.left = e.clientX + 'px';
+          this.cursor.style.top = e.clientY + 'px';
+          
+          setTimeout(() => {
+            this.follower.style.left = e.clientX + 'px';
+            this.follower.style.top = e.clientY + 'px';
+          }, 100);
+        });
+
+        // Efectos hover
+        document.querySelectorAll('a, button, .project').forEach(el => {
+          el.addEventListener('mouseenter', () => {
+            this.cursor.classList.add('cursor--hover');
+            this.follower.classList.add('cursor--hover');
+          });
+          el.addEventListener('mouseleave', () => {
+            this.cursor.classList.remove('cursor--hover');
+            this.follower.classList.remove('cursor--hover');
+          });
+        });
+      }
+    }
+
+    // Scroll reveal
+    class ScrollReveal {
+      constructor() {
+        this.elements = document.querySelectorAll('.project, .skill, .values__item');
+        this.init();
+      }
+
+      init() {
+        this.elements.forEach(el => el.classList.add('reveal'));
+        window.addEventListener('scroll', () => this.reveal());
+        this.reveal();
+      }
+
+      reveal() {
+        this.elements.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.8) {
+            el.classList.add('reveal--active');
+          }
+        });
+      }
+    }
+
+    // Progreso de scroll
+    class ScrollProgress {
+      constructor() {
+        this.progress = document.querySelector('.scroll-progress');
+        this.init();
+      }
+
+      init() {
+        window.addEventListener('scroll', () => {
+          const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+          this.progress.style.width = scrolled + '%';
+        });
+      }
+    }
+
+    // Toggle tema
+    class ThemeToggle {
+      constructor() {
+        this.toggle = document.querySelector('.theme-toggle');
+        this.icon = this.toggle.querySelector('.theme-toggle__icon');
+        this.init();
+      }
+
+      init() {
+        this.toggle.addEventListener('click', () => {
+          document.body.classList.toggle('dark-theme');
+          this.icon.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+        });
+      }
+    }
+
+    // Animación de barras de habilidades
+    class SkillBars {
+      constructor() {
+        this.bars = document.querySelectorAll('.skill__progress');
+        this.init();
+      }
+
+      init() {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('skill__progress--animate');
+            }
+          });
+        });
+
+        this.bars.forEach(bar => observer.observe(bar));
+      }
+    }
+
+    // Inicializar todo
+    document.addEventListener('DOMContentLoaded', () => {
+      new ParticleSystem();
+      new CustomCursor();
+      new ScrollReveal();
+      new ScrollProgress();
+      new ThemeToggle();
+      new SkillBars();
+
+      // Inicializar typewriters
+      document.querySelectorAll('.typewriter').forEach(el => {
+        const text = el.dataset.text;
+        const delay = parseInt(el.dataset.delay) || 0;
+        el.textContent = '';
+        new Typewriter(el, text, 50, delay).start();
+      });
+
+      // Navegación suave
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
