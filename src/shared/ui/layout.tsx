@@ -1,8 +1,14 @@
+import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import { useLocale } from '@/app/providers/LocaleProvider';
 import { usePortfolio } from '@/app/providers/PortfolioProvider';
 import { useTheme } from '@/app/providers/ThemeProvider';
 import { useActiveSection, useIsMobile } from '@/shared/hooks/useMediaQuery';
 import { useScrolled } from '@/shared/hooks/useMousePosition';
+import { FlagSpain, FlagUnitedKingdom } from '@/shared/ui/FlagIcons';
+
+const btnCompacto =
+  'w-9 h-9 shrink-0 rounded-full flex items-center justify-center text-base bg-white/5 border border-white/10 hover:border-cyan-400/40 transition-colors touch-manipulation';
 
 export function ScrollProgressController() {
   return (
@@ -17,22 +23,60 @@ export function ScrollProgressController() {
 
 export function ThemeToggle({ compact = false }: { compact?: boolean }) {
   const { theme, toggleTheme } = useTheme();
+  const { ui } = useLocale();
 
   return (
-    <motion.button
+    <button
       type="button"
       onClick={toggleTheme}
-      whileHover={{ scale: 1.08 }}
-      whileTap={{ scale: 0.95 }}
-      className={
-        compact
-          ? 'w-9 h-9 shrink-0 rounded-full flex items-center justify-center text-base bg-white/5 border border-white/10 hover:border-cyan-400/40 transition-colors'
-          : 'fixed top-5 right-5 z-[90] w-12 h-12 rounded-full glass-panel flex items-center justify-center text-xl'
-      }
-      aria-label={theme === 'dark' ? 'Activar modo claro' : 'Activar modo oscuro'}
+      className={`${compact ? btnCompacto : 'fixed top-5 right-5 z-[90] w-12 h-12 rounded-full glass-panel flex items-center justify-center text-xl touch-manipulation active:scale-95 transition-transform'} cursor-pointer`}
+      aria-label={theme === 'dark' ? ui.themeToLight : ui.themeToDark}
     >
       {theme === 'dark' ? '☀️' : '🌙'}
-    </motion.button>
+    </button>
+  );
+}
+
+export function LanguageToggle({ compact = true }: { compact?: boolean }) {
+  const { locale, setLocale, ui } = useLocale();
+
+  const boton = (codigo: 'es' | 'en', bandera: ReactNode, etiqueta: string) => {
+    const activo = locale === codigo;
+    return (
+      <button
+        type="button"
+        onClick={() => setLocale(codigo)}
+        aria-label={etiqueta}
+        aria-pressed={activo}
+        title={etiqueta}
+        className={`${compact ? 'w-9 h-9' : 'w-10 h-10'} shrink-0 rounded-full flex items-center justify-center border transition-colors touch-manipulation overflow-hidden ${
+          activo
+            ? 'border-cyan-400/60 bg-cyan-500/15 ring-1 ring-cyan-400/30'
+            : 'border-white/10 bg-white/5 opacity-80 hover:opacity-100 hover:border-cyan-400/30'
+        }`}
+      >
+        <span className="flex items-center justify-center rounded-[2px] shadow-sm ring-1 ring-black/10">
+          {bandera}
+        </span>
+      </button>
+    );
+  };
+
+  const tamanoBandera = compact ? 'w-[22px] h-[15px]' : 'w-6 h-4';
+
+  return (
+    <div
+      className="flex items-center gap-1"
+      role="group"
+      aria-label={ui.langSwitch}
+    >
+      {boton('es', <FlagSpain className={tamanoBandera} title={ui.langEs} />, ui.langEs)}
+      {boton(
+        'en',
+        <FlagUnitedKingdom className={tamanoBandera} title={ui.langEn} />,
+        ui.langEn,
+      )}
+    </div>
   );
 }
 
@@ -58,9 +102,7 @@ function NavLinks({
             <a
               href={item.href}
               className={`rounded-full font-medium transition-all whitespace-nowrap ${
-                compact
-                  ? 'px-3 py-2 text-[11px]'
-                  : 'px-3 py-2 text-xs'
+                compact ? 'px-3 py-2 text-[11px]' : 'px-3 py-2 text-xs'
               } ${
                 isActive
                   ? 'text-white bg-gradient-to-r from-blue-600/80 to-cyan-500/80 shadow-[0_0_20px_rgba(6,182,212,0.3)]'
@@ -84,15 +126,18 @@ function MobileBottomNav({
   navigation: { id: string; label: string; href: string }[];
   activeId: string;
 }) {
+  const { ui } = useLocale();
+
   return (
     <nav
-      aria-label="Navegación principal"
+      aria-label={ui.navLabel}
       className="fixed bottom-0 left-0 right-0 z-50 md:hidden px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 pointer-events-none"
     >
       <div className="glass-panel rounded-2xl px-2 py-2 flex items-center gap-2 shadow-[0_8px_32px_rgba(0,0,0,0.5)] pointer-events-auto max-w-lg mx-auto">
         <div className="flex-1 overflow-x-auto scrollbar-hide">
           <NavLinks navigation={navigation} activeId={activeId} compact />
         </div>
+        <LanguageToggle />
         <ThemeToggle compact />
       </div>
     </nav>
@@ -101,6 +146,7 @@ function MobileBottomNav({
 
 export function SiteHeader() {
   const { data } = usePortfolio();
+  const { ui } = useLocale();
   const scrolled = useScrolled(60);
   const esMovil = useIsMobile(768);
   const sectionIds = data?.navigation.map((n) => n.href.replace('#', '')) ?? [];
@@ -112,7 +158,6 @@ export function SiteHeader() {
     <>
       {esMovil && <MobileBottomNav navigation={data.navigation} activeId={activeId} />}
 
-      {/* Logo fijo — solo desktop, antes del scroll */}
       {!esMovil && (
         <motion.div
           initial={false}
@@ -124,13 +169,10 @@ export function SiteHeader() {
         </motion.div>
       )}
 
-      {/* Nav pill superior — desktop al hacer scroll; móvil siempre arriba (ligero) */}
       <motion.header
         initial={false}
         animate={
-          esMovil
-            ? { y: 0, opacity: 1 }
-            : { y: scrolled ? 0 : -100, opacity: scrolled ? 1 : 0 }
+          esMovil ? { y: 0, opacity: 1 } : { y: scrolled ? 0 : -100, opacity: scrolled ? 1 : 0 }
         }
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-3xl ${
@@ -142,21 +184,21 @@ export function SiteHeader() {
             {data.meta.name}
           </span>
 
-          <nav aria-label="Navegación principal" className="flex-1 overflow-x-auto scrollbar-hide">
+          <nav aria-label={ui.navLabel} className="flex-1 overflow-x-auto scrollbar-hide">
             <NavLinks navigation={data.navigation} activeId={activeId} />
           </nav>
 
+          <LanguageToggle />
           <ThemeToggle compact />
         </div>
       </motion.header>
 
-      {/* Tema arriba a la derecha cuando el pill de desktop está oculto */}
       {!esMovil && !scrolled && (
-        <div className="fixed top-5 right-5 z-[90] hidden md:block">
+        <div className="fixed top-5 right-5 z-[90] hidden md:flex items-center gap-2">
+          <LanguageToggle />
           <ThemeToggle compact />
         </div>
       )}
-
     </>
   );
 }

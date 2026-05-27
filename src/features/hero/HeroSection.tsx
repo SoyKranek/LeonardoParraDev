@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useLocale } from '@/app/providers/LocaleProvider';
 import { usePortfolio } from '@/app/providers/PortfolioProvider';
 import { HeroBackground } from '@/features/hero/HeroBackground';
 import { useIsMobile, usePrefersReducedMotion } from '@/shared/hooks/useMediaQuery';
@@ -9,6 +10,7 @@ import {
 } from '@/shared/ui/effects';
 
 export function HeroSection() {
+  const { ui } = useLocale();
   const { data: datosPortafolio } = usePortfolio();
   const esMovil = useIsMobile(768);
   const movimientoReducido = usePrefersReducedMotion();
@@ -38,7 +40,7 @@ export function HeroSection() {
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-xs font-mono uppercase tracking-widest text-slate-400">
-                Disponible para proyectos
+                {ui.available}
               </span>
             </motion.div>
 
@@ -134,7 +136,7 @@ export function HeroSection() {
         transition={{ delay: animarEntrada ? 1.5 : 0 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 max-md:hidden"
       >
-        <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-slate-600">Scroll</span>
+        <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-slate-600">{ui.scrollHint}</span>
         <div className="w-px h-12 bg-gradient-to-b from-cyan-400/80 to-transparent animate-scroll-hint" />
       </motion.div>
     </section>

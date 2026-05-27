@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
+import { useLocale } from '@/app/providers/LocaleProvider';
 import { usePortfolio } from '@/app/providers/PortfolioProvider';
 import { Section } from '@/shared/ui/Section';
 import { MagneticButton } from '@/shared/ui/effects';
 
 export function ContactSection() {
+  const { ui } = useLocale();
   const { data } = usePortfolio();
   if (!data) return null;
 
@@ -24,7 +26,7 @@ export function ContactSection() {
 
           <div className="relative p-10 md:p-16 text-center">
             <span className="font-mono text-xs uppercase tracking-[0.35em] text-cyan-400/80 block mb-6">
-              05 — Contacto
+              {ui.contactIndex}
             </span>
 
             <h2 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tight">
@@ -67,7 +69,7 @@ export function ContactSection() {
                   size="lg"
                   download={documentos[0].fileName}
                 >
-                  Descargar CV
+                  {ui.downloadCv}
                 </MagneticButton>
               )}
             </div>

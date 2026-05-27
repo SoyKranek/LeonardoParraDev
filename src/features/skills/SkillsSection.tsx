@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useLocale } from '@/app/providers/LocaleProvider';
 import { usePortfolio } from '@/app/providers/PortfolioProvider';
 import { Section } from '@/shared/ui/Section';
 import { EditorialHeading, GlassPanel } from '@/shared/ui/effects';
 
 export function SkillsSection() {
+  const { ui } = useLocale();
   const { data: datosPortafolio } = usePortfolio();
   const [idHabilidadActiva, setIdHabilidadActiva] = useState<string | null>(null);
 
@@ -22,7 +24,7 @@ export function SkillsSection() {
         <EditorialHeading
           title={habilidades.title}
           subtitle={habilidades.intro}
-          index="03 — Habilidades"
+          index={ui.skillsIndex}
         />
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">

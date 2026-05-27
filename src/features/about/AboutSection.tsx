@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
+import { useLocale } from '@/app/providers/LocaleProvider';
 import { usePortfolio } from '@/app/providers/PortfolioProvider';
 import { Section } from '@/shared/ui/Section';
 import { EditorialHeading, GlassPanel } from '@/shared/ui/effects';
 
 export function AboutSection() {
+  const { ui } = useLocale();
   const { data } = usePortfolio();
   if (!data) return null;
 
@@ -12,7 +14,7 @@ export function AboutSection() {
   return (
     <Section id="sobre-mi" className="relative">
       <div className="container mx-auto px-6 max-w-6xl">
-        <EditorialHeading title={about.title} subtitle={about.intro} index="01 — Sobre mí" />
+        <EditorialHeading title={about.title} subtitle={about.intro} index={ui.aboutIndex} />
 
         <div className="grid md:grid-cols-12 gap-4 md:gap-6">
           {/* Cita grande — ocupa 2 columnas en desktop */}

@@ -1,5 +1,6 @@
 import { useEffect, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useLocale } from '@/app/providers/LocaleProvider';
 import { useEsSafariIos, useIsMobile } from '@/shared/hooks/useMediaQuery';
 
 export type TipoDocumentoVisor = 'pdf' | 'pagina';
@@ -19,6 +20,7 @@ interface VisorDocumentoModalProps {
 }
 
 export function VisorDocumentoModal({ documento, abierto, onCerrar }: VisorDocumentoModalProps) {
+  const { ui } = useLocale();
   const esMovil = useIsMobile(768);
   const esSafariIos = useEsSafariIos();
 
@@ -70,7 +72,7 @@ export function VisorDocumentoModal({ documento, abierto, onCerrar }: VisorDocum
         >
           <button
             type="button"
-            aria-label="Cerrar visor"
+            aria-label={ui.closeVisor}
             className="absolute inset-0 bg-surface-950/90 backdrop-blur-md"
             onClick={onCerrar}
           />
@@ -85,7 +87,7 @@ export function VisorDocumentoModal({ documento, abierto, onCerrar }: VisorDocum
             <header className="flex-shrink-0 flex flex-wrap items-center gap-3 px-5 py-4 border-b border-white/10 bg-surface-900/80 backdrop-blur-xl safe-area-top">
               <div className="flex-1 min-w-0">
                 <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-cyan-400/80 mb-1">
-                  {esPdf ? 'Documento' : 'Credencial verificada'}
+                  {esPdf ? ui.visorDocLabel : ui.visorCredLabel}
                 </p>
                 <h2
                   id="visor-documento-titulo"
@@ -105,7 +107,7 @@ export function VisorDocumentoModal({ documento, abierto, onCerrar }: VisorDocum
                     download={documento.nombreArchivo}
                     className="flex-1 sm:flex-none text-center px-4 py-2.5 rounded-full text-xs font-semibold border border-white/15 bg-white/5 text-slate-200 hover:border-cyan-400/40 hover:text-white transition-colors"
                   >
-                    Descargar
+                    {ui.download}
                   </a>
                 )}
                 <a
@@ -114,13 +116,13 @@ export function VisorDocumentoModal({ documento, abierto, onCerrar }: VisorDocum
                   rel="noopener noreferrer"
                   className="flex-1 sm:flex-none text-center px-4 py-2.5 rounded-full text-xs font-semibold border border-cyan-500/40 bg-cyan-500/10 text-cyan-200 hover:text-white transition-colors"
                 >
-                  Abrir en pestaña ↗
+                  {ui.openInTab}
                 </a>
                 <button
                   type="button"
                   onClick={onCerrar}
                   className="w-10 h-10 shrink-0 rounded-full border border-white/15 bg-white/5 text-slate-300 hover:text-white hover:border-rose-400/40 transition-colors flex items-center justify-center"
-                  aria-label="Cerrar"
+                  aria-label={ui.close}
                 >
                   ✕
                 </button>
@@ -133,13 +135,8 @@ export function VisorDocumentoModal({ documento, abierto, onCerrar }: VisorDocum
                   <span className="text-5xl mb-6" aria-hidden>
                     📄
                   </span>
-                  <p className="text-white font-semibold mb-2 max-w-md">
-                    En este dispositivo el visor embebido no está disponible
-                  </p>
-                  <p className="text-slate-500 text-sm mb-8 max-w-sm leading-relaxed">
-                    Safari y muchos navegadores móviles no muestran PDFs dentro de la página. Abre
-                    el documento en una pestaña nueva o descárgalo.
-                  </p>
+                  <p className="text-white font-semibold mb-2 max-w-md">{ui.mobilePdfTitle}</p>
+                  <p className="text-slate-500 text-sm mb-8 max-w-sm leading-relaxed">{ui.mobilePdfBody}</p>
                   <div className="flex flex-col sm:flex-row gap-3 w-full max-w-xs">
                     <a
                       href={documento.url}
@@ -147,7 +144,7 @@ export function VisorDocumentoModal({ documento, abierto, onCerrar }: VisorDocum
                       rel="noopener noreferrer"
                       className="px-6 py-3 rounded-full text-sm font-semibold bg-gradient-to-r from-blue-600 to-cyan-500 text-white"
                     >
-                      Ver documento
+                      {ui.viewDocBtn}
                     </a>
                     {documento.nombreArchivo && (
                       <a
@@ -155,7 +152,7 @@ export function VisorDocumentoModal({ documento, abierto, onCerrar }: VisorDocum
                         download={documento.nombreArchivo}
                         className="px-6 py-3 rounded-full text-sm font-semibold border border-white/20 text-slate-200"
                       >
-                        Descargar PDF
+                        {ui.downloadPdf}
                       </a>
                     )}
                   </div>
@@ -164,7 +161,7 @@ export function VisorDocumentoModal({ documento, abierto, onCerrar }: VisorDocum
                 <>
                   {!esPdf && (
                     <p className="absolute top-3 left-1/2 -translate-x-1/2 z-10 text-xs text-slate-500 bg-surface-950/90 px-4 py-2 rounded-full border border-white/10 pointer-events-none max-w-[90%] text-center">
-                      Si no carga, usa «Abrir en pestaña».
+                      {ui.iframeHint}
                     </p>
                   )}
                   <iframe

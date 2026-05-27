@@ -8,7 +8,7 @@
       name="description"
       content="Leonardo Parra — Desarrollador Full Stack Semi Senior (.NET, React, APIs REST, IA asistida con Cursor y Claude)."
     />
-    <meta name="theme-color" content="#0b1220" />
+    <meta name="theme-color" content="#0b1220" id="meta-theme-color" />
     <meta name="robots" content="index, follow" />
     <meta property="og:title" content="Leonardo Parra — Full Stack .NET · React · AWS" />
     <meta
@@ -24,6 +24,28 @@
       rel="stylesheet"
     />
     <title>Leonardo Parra — Full Stack .NET · React · AWS</title>
+    <script>
+      (function () {
+        try {
+          var root = document.documentElement;
+          var theme = localStorage.getItem('portfolio-theme');
+          if (theme === 'light') {
+            root.classList.add('light');
+            root.dataset.theme = 'light';
+            root.style.colorScheme = 'light';
+            var meta = document.getElementById('meta-theme-color');
+            if (meta) meta.setAttribute('content', '#f1f5f9');
+          } else {
+            root.classList.remove('light');
+            root.dataset.theme = 'dark';
+            root.style.colorScheme = 'dark';
+          }
+          var locale = localStorage.getItem('portfolio-locale');
+          if (locale === 'en') root.lang = 'en';
+          else if (locale === 'es') root.lang = 'es';
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

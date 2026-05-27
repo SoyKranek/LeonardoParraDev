@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
+import { useLocale } from '@/app/providers/LocaleProvider';
 import { usePortfolio } from '@/app/providers/PortfolioProvider';
+import type { UiStrings } from '@/content/ui.strings';
 import { useIsMobile, usePrefersReducedMotion } from '@/shared/hooks/useMediaQuery';
 import { Section } from '@/shared/ui/Section';
 import {
@@ -22,7 +24,8 @@ function TarjetaProyecto({
   proyecto,
   indiceAnimacion = 0,
   animarEntrada = true,
-}: TarjetaProyectoProps & { animarEntrada?: boolean }) {
+  ui,
+}: TarjetaProyectoProps & { animarEntrada?: boolean; ui: UiStrings }) {
   return (
     <motion.div
       initial={animarEntrada ? { opacity: 0, y: 28 } : false}
@@ -40,7 +43,7 @@ function TarjetaProyecto({
             <div className="absolute inset-0 grid-overlay opacity-20" />
             {proyecto.featured && (
               <span className="absolute top-4 right-4 px-3 py-1 text-[10px] font-mono uppercase tracking-widest rounded-full bg-black/30 text-white backdrop-blur-sm border border-white/20">
-                ★ Destacado
+                ★ {ui.featured}
               </span>
             )}
             <h3 className="absolute bottom-4 left-6 text-2xl font-black text-white drop-shadow-lg">
@@ -55,7 +58,7 @@ function TarjetaProyecto({
 
             <div className="mb-6">
               <p className="text-[10px] font-mono uppercase tracking-widest text-slate-600 mb-3">
-                Stack
+                {ui.stack}
               </p>
               <div className="flex flex-wrap gap-2">
                 {proyecto.technologies.map((tech) => (
@@ -79,7 +82,7 @@ function TarjetaProyecto({
                 ))
               ) : (
                 <span className="text-xs font-mono uppercase tracking-widest text-slate-600 px-2 py-2">
-                  Proyecto institucional · producción
+                  {ui.institutionalProject}
                 </span>
               )}
             </div>
@@ -92,6 +95,7 @@ function TarjetaProyecto({
 
 // Escritorio: carrusel auto + tilt. Móvil: scroll manual.
 export function ProjectsSection() {
+  const { ui } = useLocale();
   const { data: datosPortafolio } = usePortfolio();
   const esMovil = useIsMobile(768);
   const movimientoReducido = usePrefersReducedMotion();
@@ -119,7 +123,7 @@ export function ProjectsSection() {
               <EditorialHeading
                 title={grupo.title}
                 subtitle={grupo.description}
-                index={`0${indiceGrupo + 2} — Proyectos`}
+                index={ui.projectsIndex(indiceGrupo + 2)}
               />
             </div>
 
@@ -152,6 +156,7 @@ export function ProjectsSection() {
                     proyecto={proyecto}
                     indiceAnimacion={indice % grupo.projects.length}
                     animarEntrada={animarEntrada}
+                    ui={ui}
                   />
                 ))}
 
@@ -164,7 +169,7 @@ export function ProjectsSection() {
                   >
                     <GlassPanel className="p-8 text-center h-full flex flex-col items-center justify-center border-dashed border-white/10">
                       <span className="text-4xl mb-4">🚀</span>
-                      <p className="text-slate-500 text-sm font-mono">Más proyectos en camino</p>
+                      <p className="text-slate-500 text-sm font-mono">{ui.moreProjects}</p>
                     </GlassPanel>
                   </motion.div>
                 )}
@@ -173,7 +178,7 @@ export function ProjectsSection() {
 
             {usarCarruselEnGrupo && (
               <p className="text-center text-[10px] font-mono uppercase tracking-widest text-slate-600 mt-2">
-                Pasa el cursor sobre una tarjeta para pausar y explorar
+                {ui.carouselHint}
               </p>
             )}
           </div>

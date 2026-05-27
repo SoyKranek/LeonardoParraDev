@@ -9,23 +9,46 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
+const STORAGE_KEY = 'portfolio-theme';
+
+function leerTemaGuardado(): Theme {
+  if (typeof localStorage === 'undefined') return 'dark';
+  return localStorage.getItem(STORAGE_KEY) === 'light' ? 'light' : 'dark';
+}
+
+function aplicarTemaEnDocumento(theme: Theme) {
+  const esClaro = theme === 'light';
+  document.documentElement.classList.toggle('light', esClaro);
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.style.colorScheme = esClaro ? 'light' : 'dark';
+
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) {
+    metaTheme.setAttribute('content', esClaro ? '#f1f5f9' : '#0b1220');
+  }
+}
+
 interface ThemeProviderProps {
   children: ReactNode;
 }
 
-// Tema claro/oscuro — persiste en localStorage.
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem('portfolio-theme');
-    return stored === 'light' ? 'light' : 'dark';
+    const inicial = leerTemaGuardado();
+    if (typeof document !== 'undefined') {
+      aplicarTemaEnDocumento(inicial);
+    }
+    return inicial;
   });
 
   useEffect(() => {
-    document.documentElement.classList.toggle('light', theme === 'light');
-    localStorage.setItem('portfolio-theme', theme);
+    aplicarTemaEnDocumento(theme);
+    localStorage.setItem(STORAGE_KEY, theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   const value = useMemo(() => ({ theme, toggleTheme }), [theme]);
 

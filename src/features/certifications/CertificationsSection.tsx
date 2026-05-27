@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useLocale } from '@/app/providers/LocaleProvider';
 import { usePortfolio } from '@/app/providers/PortfolioProvider';
 import { Section } from '@/shared/ui/Section';
 import {
@@ -12,17 +13,10 @@ import {
   VisorDocumentoModal,
   type DocumentoEnVisor,
 } from '@/shared/ui/VisorDocumentoModal';
-import type { Certification, CertificationCategory } from '@/shared/types/portfolio.types';
-
-const etiquetasCategoria: Record<CertificationCategory, string> = {
-  tecnologia: 'Tecnología',
-  metodologias: 'Metodologías',
-  cloud: 'Cloud',
-  idiomas: 'Idiomas',
-  otros: 'Otros',
-};
+import type { Certification } from '@/shared/types/portfolio.types';
 
 export function CertificationsSection() {
+  const { ui } = useLocale();
   const { data: datosPortafolio } = usePortfolio();
   const [mostrarTodas, setMostrarTodas] = useState(false);
   const [documentoEnVisor, setDocumentoEnVisor] = useState<DocumentoEnVisor | null>(null);
@@ -78,9 +72,12 @@ export function CertificationsSection() {
       <Section id="certificaciones">
         <div className="container mx-auto px-6 max-w-6xl">
           <EditorialHeading
-            title="Credenciales y documentos"
-            subtitle={`${datosPortafolio.certifications.length} certificaciones activas · ${totalConDocumento} verificables desde el navegador.`}
-            index="04 — Certificaciones"
+            title={ui.certFeaturedHeading}
+            subtitle={ui.certSectionSubtitle(
+              datosPortafolio.certifications.length,
+              totalConDocumento,
+            )}
+            index={ui.certIndex}
           />
 
           {/* CV y carta de presentación */}
@@ -105,7 +102,7 @@ export function CertificationsSection() {
                         })
                       }
                     >
-                      Ver documento
+                      {ui.viewDocument}
                     </MagneticButton>
                     <MagneticButton
                       href={documento.pdfPath}
@@ -113,7 +110,7 @@ export function CertificationsSection() {
                       download={documento.fileName}
                       magnetic={false}
                     >
-                      Descargar
+                      {ui.download}
                     </MagneticButton>
                   </div>
                 </GlassPanel>
@@ -130,15 +127,15 @@ export function CertificationsSection() {
               return (
                 <GlassPanel key={certificacion.id} className="p-5 h-full flex flex-col">
                   <div className="flex flex-wrap gap-2 mb-2">
-                    <NeonTag>{etiquetasCategoria[certificacion.category]}</NeonTag>
+                    <NeonTag>{ui.certCategories[certificacion.category]}</NeonTag>
                     {certificacion.pdfPath && (
                       <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400/90 px-2 py-0.5 rounded border border-emerald-400/20">
-                        PDF
+                        {ui.pdfBadge}
                       </span>
                     )}
                     {certificacion.credentialUrl && !certificacion.pdfPath && (
                       <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400/90 px-2 py-0.5 rounded border border-cyan-400/20">
-                        En línea
+                        {ui.onlineBadge}
                       </span>
                     )}
                   </div>
@@ -154,7 +151,7 @@ export function CertificationsSection() {
                         magnetic={false}
                         onClick={() => abrirVisor(payloadVisor)}
                       >
-                        {certificacion.pdfPath ? 'Ver diploma' : 'Ver credencial'}
+                        {certificacion.pdfPath ? ui.viewDiploma : ui.viewCredential}
                       </MagneticButton>
                       {certificacion.pdfPath && (
                         <MagneticButton
@@ -163,7 +160,7 @@ export function CertificationsSection() {
                           download={`${certificacion.title.replace(/\s+/g, '_')}.pdf`}
                           magnetic={false}
                         >
-                          Descargar
+                          {ui.download}
                         </MagneticButton>
                       )}
                       {certificacion.credentialUrl && (
@@ -173,7 +170,7 @@ export function CertificationsSection() {
                           external
                           magnetic={false}
                         >
-                          Abrir ↗
+                          {ui.openExternal}
                         </MagneticButton>
                       )}
                     </div>
@@ -191,7 +188,7 @@ export function CertificationsSection() {
                 className="px-6 py-3 rounded-full glass-panel text-sm font-mono uppercase tracking-widest text-slate-400 hover:text-white hover:border-cyan-400/30 transition-colors"
                 data-cursor="pointer"
               >
-                Ver las {cantidadOcultas} certificaciones restantes
+                {ui.showMoreCerts(cantidadOcultas)}
               </button>
             </div>
           )}

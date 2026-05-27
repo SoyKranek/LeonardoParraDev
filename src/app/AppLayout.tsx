@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from 'react';
+import { useLocale } from '@/app/providers/LocaleProvider';
 import { usePortfolio } from '@/app/providers/PortfolioProvider';
 import { AboutSection } from '@/features/about/AboutSection';
 import { CertificationsSection } from '@/features/certifications/CertificationsSection';
@@ -44,6 +45,7 @@ function useScrollProgress() {
 
 export function AppLayout() {
   const { data, loading, error } = usePortfolio();
+  const { ui } = useLocale();
   const esMovil = useIsMobile(768);
   useScrollProgress();
 
@@ -70,7 +72,7 @@ export function AppLayout() {
           <div className="relative w-16 h-16">
             <div className="absolute inset-2 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
           </div>
-          <p className="text-slate-500 font-mono text-xs uppercase tracking-[0.3em]">Cargando...</p>
+          <p className="text-slate-500 font-mono text-xs uppercase tracking-[0.3em]">{ui.loading}</p>
         </div>
       </div>
     );
@@ -79,7 +81,7 @@ export function AppLayout() {
   if (error || !data) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-surface-950 px-6">
-        <p className="text-red-400 text-center">{error ?? 'Error desconocido'}</p>
+        <p className="text-red-400 text-center">{error ?? ui.unknownError}</p>
       </div>
     );
   }
