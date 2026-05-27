@@ -98,7 +98,10 @@ export function ProjectsSection() {
   return (
     <Section id="proyectos" className="overflow-hidden">
       {datosPortafolio.projectGroups.map((grupo, indiceGrupo) => {
-        const proyectosParaMostrar = usarCarruselAutomatico
+        const tieneMultiplesProyectos = grupo.projects.length > 1;
+        const usarCarruselEnGrupo = usarCarruselAutomatico && tieneMultiplesProyectos;
+
+        const proyectosParaMostrar = usarCarruselEnGrupo
           ? [...grupo.projects, ...grupo.projects]
           : grupo.projects;
 
@@ -116,19 +119,19 @@ export function ProjectsSection() {
 
             <div
               className={
-                usarCarruselAutomatico
+                usarCarruselEnGrupo
                   ? 'overflow-hidden px-6 pb-8 md:px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]'
                   : 'flex gap-6 overflow-x-auto snap-x-mandatory scrollbar-hide px-6 pb-8 md:px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]'
               }
             >
               <div
                 className={
-                  usarCarruselAutomatico
+                  usarCarruselEnGrupo
                     ? 'flex gap-6 w-max animate-projects-scroll py-1'
                     : 'flex gap-6'
                 }
                 style={
-                  usarCarruselAutomatico
+                  usarCarruselEnGrupo
                     ? ({
                         ['--projects-scroll-duration' as string]: `${duracionSegundos}s`,
                       } as React.CSSProperties)
@@ -143,7 +146,7 @@ export function ProjectsSection() {
                   />
                 ))}
 
-                {!usarCarruselAutomatico && (
+                {!usarCarruselEnGrupo && (
                   <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -159,7 +162,7 @@ export function ProjectsSection() {
               </div>
             </div>
 
-            {usarCarruselAutomatico && (
+            {usarCarruselEnGrupo && (
               <p className="text-center text-[10px] font-mono uppercase tracking-widest text-slate-600 mt-2">
                 Pasa el cursor sobre una tarjeta para pausar y explorar
               </p>
