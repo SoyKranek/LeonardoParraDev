@@ -18,11 +18,16 @@ interface TarjetaProyectoProps {
   indiceAnimacion?: number;
 }
 
-function TarjetaProyecto({ proyecto, indiceAnimacion = 0 }: TarjetaProyectoProps) {
+function TarjetaProyecto({
+  proyecto,
+  indiceAnimacion = 0,
+  animarEntrada = true,
+}: TarjetaProyectoProps & { animarEntrada?: boolean }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={animarEntrada ? { opacity: 0, y: 28 } : false}
+      animate={animarEntrada ? undefined : { opacity: 1, y: 0 }}
+      whileInView={animarEntrada ? { opacity: 1, y: 0 } : undefined}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ delay: indiceAnimacion * 0.06, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       className="h-full"
@@ -94,6 +99,7 @@ export function ProjectsSection() {
   if (!datosPortafolio) return null;
 
   const usarCarruselAutomatico = !esMovil && !movimientoReducido;
+  const animarEntrada = !esMovil && !movimientoReducido;
 
   return (
     <Section id="proyectos" className="overflow-hidden">
@@ -121,14 +127,16 @@ export function ProjectsSection() {
               className={
                 usarCarruselEnGrupo
                   ? 'overflow-hidden px-6 pb-8 md:px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]'
-                  : 'flex gap-6 overflow-x-auto snap-x-mandatory scrollbar-hide px-6 pb-8 md:px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]'
+                  : tieneMultiplesProyectos
+                    ? 'overflow-x-auto snap-x snap-mandatory scrollbar-hide px-6 pb-8 touch-pan-x md:px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]'
+                    : 'px-6 pb-8 flex justify-center md:px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]'
               }
             >
               <div
                 className={
                   usarCarruselEnGrupo
                     ? 'flex gap-6 w-max animate-projects-scroll py-1'
-                    : 'flex gap-6'
+                    : `flex gap-6 ${tieneMultiplesProyectos ? 'w-max min-w-0' : 'w-full max-w-[520px]'}`
                 }
                 style={
                   usarCarruselEnGrupo
@@ -143,10 +151,11 @@ export function ProjectsSection() {
                     key={`${proyecto.id}-${indice}`}
                     proyecto={proyecto}
                     indiceAnimacion={indice % grupo.projects.length}
+                    animarEntrada={animarEntrada}
                   />
                 ))}
 
-                {!usarCarruselEnGrupo && (
+                {!usarCarruselEnGrupo && tieneMultiplesProyectos && (
                   <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}

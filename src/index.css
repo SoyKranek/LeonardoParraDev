@@ -153,6 +153,26 @@
     scroll-snap-type: x mandatory;
   }
 
+  .h-modal-visor {
+    height: 92vh;
+    height: 92dvh;
+    max-height: 92dvh;
+  }
+
+  @supports (height: 100dvh) {
+    .h-modal-visor {
+      height: min(92dvh, 100%);
+    }
+  }
+
+  .safe-area-top {
+    padding-top: max(1rem, env(safe-area-inset-top, 0px));
+  }
+
+  .touch-pan-x {
+    touch-action: pan-x;
+  }
+
   .animate-projects-scroll {
     animation: projects-scroll var(--projects-scroll-duration, 55s) linear infinite;
   }

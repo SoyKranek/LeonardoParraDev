@@ -252,6 +252,26 @@ export function RotatingRoles({ roles }: { roles: string[] }) {
 }
 
 export function TechMarquee({ items }: { items: string[] }) {
+  const mobile = useIsMobile(768);
+  const reduced = usePrefersReducedMotion();
+
+  if (mobile || reduced) {
+    return (
+      <div className="border-y border-white/5 bg-black/30 py-4 px-4">
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 max-w-4xl mx-auto">
+          {items.map((item) => (
+            <span
+              key={item}
+              className="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-500"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   const doubled = [...items, ...items];
 
   return (
@@ -277,13 +297,15 @@ export function AmbientBackground() {
   const { x, y } = useMousePosition();
   const reduced = usePrefersReducedMotion();
   const lowPower = useLowPowerDevice();
+  const mobile = useIsMobile(768);
+  const blobActivo = !reduced && !lowPower && !mobile;
 
   return (
     <div className="fixed inset-0 -z-50 pointer-events-none overflow-hidden" aria-hidden>
       <div className="absolute inset-0 bg-surface-950" />
       <div className="absolute inset-0 mesh-gradient" />
 
-      {!reduced && !lowPower && (
+      {blobActivo && (
         <div
           className="absolute w-[520px] h-[520px] rounded-full blur-[100px] opacity-20 will-change-[left,top]"
           style={{

@@ -31,7 +31,9 @@ export function useMousePosition() {
 }
 
 export function useScrolled(threshold = 80): boolean {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(
+    () => typeof window !== 'undefined' && window.scrollY > threshold,
+  );
 
   useEffect(() => {
     let ticking = false;
